@@ -1,20 +1,4 @@
-export interface IUser {
-  username: string
-  name: string
-}
-
-export interface IComment {
-  id: string
-  author: IUser
-  comment: string
-}
-
-export interface IPost {
-  id: string
-  author: IUser
-  body: string
-  comments: IComment[]
-}
+import { IPost } from '@/entities/PostEntities'
 
 export type IGetPostsResponse = IPost[]
 
@@ -23,42 +7,41 @@ export function getPosts(): Promise<IGetPostsResponse> {
     {
       id: 'post1',
       author: { username: 'user1', name: 'User 1' },
-      body: '......',
+      body: '...post contents 1..',
       comments: [
         {
           id: 'comment1',
           author: { username: 'user2', name: 'User 2' },
-          comment: '.....',
+          comment: '...comment 1-1..',
         },
         {
           id: 'comment2',
           author: { username: 'user3', name: 'User 3' },
-          comment: '.....',
+          comment: '...comment 1-2..',
         },
       ],
     },
     {
       id: 'post2',
       author: { username: 'user2', name: 'User 2' },
-      body: '......',
+      body: '...post contents 2..',
       comments: [
         {
           id: 'comment3',
           author: { username: 'user3', name: 'User 3' },
-          comment: '.....',
+          comment: '...comment 2-1..',
         },
         {
           id: 'comment4',
           author: { username: 'user1', name: 'User 1' },
-          comment: '.....',
+          comment: '...comment 2-2..',
         },
         {
           id: 'comment5',
           author: { username: 'user3', name: 'User 3' },
-          comment: '.....',
+          comment: '...comment 2-3..',
         },
       ],
     },
-    // and repeat many times
   ])
 }
