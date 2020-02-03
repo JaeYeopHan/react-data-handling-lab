@@ -5,8 +5,6 @@ export interface IUser {
   name: string
 }
 
-export interface IUserEntity extends IUser {}
-
 export interface IComment {
   id: string
   author: IUser
@@ -20,29 +18,29 @@ export interface IPost {
   comments: IComment[]
 }
 
+const user = new schema.Entity<IUser>('users', {}, { idAttribute: 'username' })
+
+export interface IUserEntity extends IUser {}
+
+const comment = new schema.Entity<IComment>('comments', {
+  author: user,
+})
+
+// ? Case 1
+export type ICommentEntity = Omit<IComment, 'author'> & Pick<IUser, 'username'>
+
+const post = new schema.Entity<IPost>('posts', {
+  author: user,
+  comments: [comment],
+})
+
+// ? Case 2
 export interface IPostEntity {
   id: Pick<IPost, 'id'>
   author: Pick<IUser, 'username'>
   body: string
   comments: Pick<IComment, 'id'>[]
 }
-
-const user = new schema.Entity<IUser>('users', {}, { idAttribute: 'username' })
-
-const comment = new schema.Entity<IComment>('comments', {
-  author: user,
-})
-
-export interface ICommentEntity {
-  id: string
-  author: string
-  comment: string
-}
-
-const post = new schema.Entity<IPost>('posts', {
-  author: user,
-  comments: [comment],
-})
 
 export type INormalizedKeys = string[]
 
