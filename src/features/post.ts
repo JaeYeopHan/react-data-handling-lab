@@ -47,3 +47,6 @@ export function fetchPosts(): AppThunk {
 export const POST = _.name
 export const postReducer = _.reducer
 export const postActions = _.actions
+export const postThunks = {
+  fetchPosts,
+}
