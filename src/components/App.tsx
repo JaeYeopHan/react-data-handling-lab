@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { postThunks } from '@/features/post'
 
 export default () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(postThunks.fetchPosts())
+  }, [dispatch])
+
   return (
     <h1>
       <a
