@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { getPosts, IGetPostsResponse } from '@/api/post'
+import { IPostLabel } from '@/models/PostDomains'
 import { INormalizedPosts, normalizePost } from '@/models/PostEntities'
 
 import { IPostEntity } from '../models/PostEntities'
@@ -32,7 +33,7 @@ const _ = createSlice({
 })
 
 const getPostIds = (state: IPostState) => state.result
-const getPostLabel = (state: IPostState, props: { id: string }) => {
+const getPostLabel = (state: IPostState, props: { id: string }): IPostLabel => {
   const post: IPostEntity = state.entities.posts[props.id]
 
   return {

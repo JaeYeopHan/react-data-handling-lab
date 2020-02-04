@@ -16,3 +16,9 @@ export interface IPost {
   body: string
   comments: IComment[]
 }
+
+export interface IPostLabel {
+  title: string
+  author: string
+  countOfComment: number
+}
