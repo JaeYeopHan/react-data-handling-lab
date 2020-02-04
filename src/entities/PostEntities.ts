@@ -19,6 +19,7 @@ export type ICommentEntity = IEntityTypeOf<IComment>
 
 export interface IPost {
   id: string
+  title: string
   author: IUser
   body: string
   comments: IComment[]
@@ -43,7 +44,7 @@ export type INormalizedPosts = NormalizedSchema<
     comments?: IndexSignatureStringType<ICommentEntity>
     users?: IndexSignatureStringType<IUserEntity>
   },
-  Pick<IPost, 'id'>[]
+  string[]
 >
 
 export function normalizePost(data: IPost[]): INormalizedPosts {

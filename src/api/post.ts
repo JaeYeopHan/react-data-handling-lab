@@ -6,6 +6,7 @@ export function getPosts(): Promise<IGetPostsResponse> {
   return Promise.resolve([
     {
       id: 'post1',
+      title: 'First post',
       author: { username: 'user1', name: 'User 1' },
       body: '...post contents 1..',
       comments: [
@@ -23,6 +24,7 @@ export function getPosts(): Promise<IGetPostsResponse> {
     },
     {
       id: 'post2',
+      title: 'Second post',
       author: { username: 'user2', name: 'User 2' },
       body: '...post contents 2..',
       comments: [
