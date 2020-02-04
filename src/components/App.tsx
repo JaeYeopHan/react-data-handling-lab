@@ -11,14 +11,15 @@ export default () => {
   }, [dispatch])
 
   return (
-    <h1>
-      <a
-        href="https://github.com/JaeYeopHan/cra-template-unicorn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        cra-template-unicorn
-      </a>
-    </h1>
+    <main>
+      <h1>Normalize Example</h1>
+      <ul>
+        <li>
+          <div>title</div>
+          <div>body preview</div>
+          <div>comment count</div>
+        </li>
+      </ul>
+    </main>
   )
 }
