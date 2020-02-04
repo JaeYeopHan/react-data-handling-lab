@@ -2,28 +2,11 @@ import { normalize, NormalizedSchema, schema } from 'normalizr'
 
 import { IEntityTypeOf, IndexSignatureStringType } from '@/typings'
 
-export interface IUser {
-  username: string
-  name: string
-}
+import { IComment, IPost, IUser } from './PostDomains'
 
 export type IUserEntity = IEntityTypeOf<IUser>
 
-export interface IComment {
-  id: number
-  author: IUser
-  comment: string
-}
-
 export type ICommentEntity = IEntityTypeOf<IComment>
-
-export interface IPost {
-  id: string
-  title: string
-  author: IUser
-  body: string
-  comments: IComment[]
-}
 
 export type IPostEntity = IEntityTypeOf<IPost>
 
