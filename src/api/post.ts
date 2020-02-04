@@ -1,4 +1,4 @@
-import { IPost } from '@/entities/PostEntities'
+import { IPost } from '@/models/PostDomains'
 
 export type IGetPostsResponse = IPost[]
 

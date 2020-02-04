@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { getPosts, IGetPostsResponse } from '@/api/post'
-import { INormalizedPosts, normalizePost } from '@/entities/PostEntities'
+import { INormalizedPosts, normalizePost } from '@/models/PostEntities'
 
+import { IPostEntity } from '../models/PostEntities'
 import { AppThunk } from '.'
+import { ERROR_CODE, errorActions } from './error'
 import { loadingActions } from './loading'
 
-interface IPostState extends INormalizedPosts {}
+export interface IPostState extends INormalizedPosts {}
 
 const name = 'Post'
 const initialState: IPostState = {
@@ -29,6 +31,17 @@ const _ = createSlice({
   },
 })
 
+const getPostIds = (state: IPostState) => state.result
+const getPostLabel = (state: IPostState, props: { id: string }) => {
+  const post: IPostEntity = state.entities.posts[props.id]
+
+  return {
+    title: post.title,
+    author: post.author,
+    countOfComment: post.comments.length,
+  }
+}
+
 export function fetchPosts(): AppThunk {
   return async function(dispatch) {
     dispatch(loadingActions.start(name))
@@ -37,6 +50,7 @@ export function fetchPosts(): AppThunk {
 
       dispatch(postActions.success(response))
     } catch (e) {
+      dispatch(errorActions.trigger(ERROR_CODE.API_ERROR))
     } finally {
       dispatch(loadingActions.finish(name))
     }
@@ -46,6 +60,10 @@ export function fetchPosts(): AppThunk {
 export const POST = _.name
 export const postReducer = _.reducer
 export const postActions = _.actions
+export const postSelector = {
+  postIds: getPostIds,
+  postLabel: getPostLabel,
+}
 export const postThunks = {
   fetchPosts,
 }
