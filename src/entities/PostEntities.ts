@@ -46,6 +46,20 @@ export interface IPostEntity {
   comments: Pick<IComment, 'id'>[]
 }
 
+type EntityOf<M extends object> = {
+  [k in keyof M]: string | number
+}
+
+type EntityPost = EntityOf<IPostEntity>
+
+// const usern: Pick<IUser, 'username'> = 'jbee'
+// const testPost: IPostEntity = {
+//   id: 'id',
+//   author: 'jbee',
+//   body: 'test',
+//   comment: [1],
+// }
+
 export type INormalizedPosts = NormalizedSchema<
   {
     posts: IndexSignature<IPostEntity, 'id'>
