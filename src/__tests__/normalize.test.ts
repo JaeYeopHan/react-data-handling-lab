@@ -1,10 +1,11 @@
-import { normalizePost } from '@/entities/PostEntities'
+import { normalizePost } from '@/models/PostEntities'
 
 test('should return normalized post data', () => {
   // Given
   const data = [
     {
       id: 'post1',
+      title: 'First Post',
       author: { username: 'user1', name: 'User 1' },
       body: '...post contents 1..',
       comments: [
@@ -22,6 +23,7 @@ test('should return normalized post data', () => {
     },
     {
       id: 'post2',
+      title: 'Second Post',
       author: { username: 'user2', name: 'User 2' },
       body: '...post contents 2...',
       comments: [],
@@ -37,12 +39,14 @@ test('should return normalized post data', () => {
       posts: {
         post1: {
           id: 'post1',
+          title: 'First Post',
           author: 'user1',
           body: '...post contents 1..',
           comments: [1, 2],
         },
         post2: {
           id: 'post2',
+          title: 'Second Post',
           author: 'user2',
           body: '...post contents 2...',
           comments: [],
