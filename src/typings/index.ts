@@ -1,11 +1,11 @@
-export interface IndexSignatureStringType<T> {
-  [key: string]: T
+export interface IndexSignatureStringType<V> {
+  [key: string]: V
 }
 
-export interface IndexSignatureNumberType<T> {
-  [key: number]: T
+export interface IndexSignatureNumberType<V> {
+  [key: number]: V
 }
 
-export interface IndexSignature<T, NM extends string> {
-  [key: Pick<T, NM> extends string ? string : number]: T
+export type IEntityTypeOf<M> = {
+  [k in keyof M]: M[k]
 }
