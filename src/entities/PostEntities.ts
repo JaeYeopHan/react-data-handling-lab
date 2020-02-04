@@ -1,12 +1,14 @@
 import { normalize, NormalizedSchema, schema } from 'normalizr'
 
+import { IndexSignature } from '@/typings'
+
 export interface IUser {
   username: string
   name: string
 }
 
 export interface IComment {
-  id: string
+  id: number
   author: IUser
   comment: string
 }
@@ -26,15 +28,17 @@ const comment = new schema.Entity<IComment>('comments', {
   author: user,
 })
 
-// ? Case 1
-export type ICommentEntity = Omit<IComment, 'author'> & Pick<IUser, 'username'>
+export interface ICommentEntity {
+  id: Pick<IComment, 'id'>
+  author: Pick<IUser, 'username'>
+  comment: Pick<IComment, 'comment'>
+}
 
 const post = new schema.Entity<IPost>('posts', {
   author: user,
   comments: [comment],
 })
 
-// ? Case 2
 export interface IPostEntity {
   id: Pick<IPost, 'id'>
   author: Pick<IUser, 'username'>
@@ -42,14 +46,13 @@ export interface IPostEntity {
   comments: Pick<IComment, 'id'>[]
 }
 
-export type INormalizedKeys = string[]
-
-export type INormalizedPostEntity = {
-  [key: string]: { [key: string]: IPostEntity | ICommentEntity | IUserEntity }
-}
 export type INormalizedPosts = NormalizedSchema<
-  INormalizedPostEntity,
-  INormalizedKeys
+  {
+    posts: IndexSignature<IPostEntity, 'id'>
+    comments?: IndexSignature<ICommentEntity, 'id'>
+    users?: IndexSignature<IUserEntity, 'username'>
+  },
+  Pick<IPost, 'id'>[]
 >
 
 export function normalizePost(data: IPost[]): INormalizedPosts {
