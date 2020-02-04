@@ -1,20 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { getPosts, IGetPostsResponse } from '@/api/post'
-import { INormalizedPostEntity, normalizePost } from '@/entities/PostEntities'
+import { INormalizedPosts, normalizePost } from '@/entities/PostEntities'
 
 import { AppThunk } from '.'
 import { loadingActions } from './loading'
 
-interface IPostState {
-  entities: INormalizedPostEntity
-  allIds: string[]
-}
+interface IPostState extends INormalizedPosts {}
 
 const name = 'Post'
 const initialState: IPostState = {
-  entities: {},
-  allIds: [],
+  entities: {
+    posts: {},
+  },
+  result: [],
 }
 
 const _ = createSlice({
@@ -25,7 +24,7 @@ const _ = createSlice({
       const { entities, result } = normalizePost(action.payload)
 
       state.entities = entities
-      state.allIds = result
+      state.result = result
     },
   },
 })

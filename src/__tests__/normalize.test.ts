@@ -9,12 +9,12 @@ test('should return normalized post data', () => {
       body: '...post contents 1..',
       comments: [
         {
-          id: 'comment1',
+          id: 1,
           author: { username: 'user2', name: 'User 2' },
           comment: '...comment 1-1..',
         },
         {
-          id: 'comment2',
+          id: 2,
           author: { username: 'user3', name: 'User 3' },
           comment: '...comment 1-2..',
         },
@@ -39,7 +39,7 @@ test('should return normalized post data', () => {
           id: 'post1',
           author: 'user1',
           body: '...post contents 1..',
-          comments: ['comment1', 'comment2'],
+          comments: [1, 2],
         },
         post2: {
           id: 'post2',
@@ -49,13 +49,13 @@ test('should return normalized post data', () => {
         },
       },
       comments: {
-        comment1: {
-          id: 'comment1',
+        1: {
+          id: 1,
           author: 'user2',
           comment: '...comment 1-1..',
         },
-        comment2: {
-          id: 'comment2',
+        2: {
+          id: 2,
           author: 'user3',
           comment: '...comment 1-2..',
         },
