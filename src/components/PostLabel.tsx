@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
 import { POST, postSelector } from '@/features/post'
@@ -10,15 +11,18 @@ interface IPostLabelProps {
 }
 
 export const PostLabel = (props: IPostLabelProps) => {
+  const { id } = props
   const label = useSelector<IRootState, IPostLabel>(state =>
-    postSelector.postLabel(state[POST], { id: props.id }),
+    postSelector.postLabel(state[POST], { id }),
   )
 
   return (
-    <li>
-      <div>{label.title}</div>
-      <div>{label.author}</div>
-      <div>{label.countOfComment}</div>
-    </li>
+    <Link to={`/${id}`}>
+      <li>
+        <div>{label.title}</div>
+        <div>{label.author}</div>
+        <div>{label.countOfComment}</div>
+      </li>
+    </Link>
   )
 }
