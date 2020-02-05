@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface LoadingState {
+export interface ILoadingState {
   [key: string]: boolean
 }
 
@@ -10,10 +10,10 @@ const _ = createSlice({
   name,
   initialState: {},
   reducers: {
-    start(state: LoadingState, action: PayloadAction<string>) {
+    start(state: ILoadingState, action: PayloadAction<string>) {
       state[action.payload] = true
     },
-    finish(state: LoadingState, action: PayloadAction<string>) {
+    finish(state: ILoadingState, action: PayloadAction<string>) {
       state[action.payload] = false
     },
   },
