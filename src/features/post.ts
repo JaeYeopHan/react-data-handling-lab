@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { getPosts, IGetPostsResponse } from '@/api/post'
 import { IPostLabel } from '@/models/PostDomains'
-import { INormalizedPosts, normalizePost } from '@/models/PostEntities'
+import {
+  ICommentEntity,
+  INormalizedPosts,
+  normalizePost,
+} from '@/models/PostEntities'
 
 import { IPostEntity } from '../models/PostEntities'
 import { AppThunk } from '.'
@@ -33,14 +37,31 @@ const _ = createSlice({
 })
 
 const getPostIds = (state: IPostState) => state.result
+const getPost = (state: IPostState, props: { id: string }): IPostEntity => {
+  return state.entities.posts[props.id]
+}
 const getPostLabel = (state: IPostState, props: { id: string }): IPostLabel => {
-  const post: IPostEntity = state.entities.posts[props.id]
+  const post: IPostEntity = getPost(state, { id: props.id })
 
   return {
     title: post.title,
     author: post.author,
     countOfComment: post.comments.length,
   }
+}
+const getComment = (
+  state: IPostState,
+  props: { id: string },
+): ICommentEntity | never => {
+  if (!state.entities.comments) {
+    return {
+      id: -1,
+      author: '',
+      comment: '',
+    }
+  }
+
+  return state.entities.comments[props.id]
 }
 
 export function fetchPosts(): AppThunk {
@@ -63,7 +84,10 @@ export const postReducer = _.reducer
 export const postActions = _.actions
 export const postSelector = {
   postIds: getPostIds,
+  post: getPost,
   postLabel: getPostLabel,
+
+  comment: getComment,
 }
 export const postThunks = {
   fetchPosts,
