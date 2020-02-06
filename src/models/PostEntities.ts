@@ -33,3 +33,16 @@ export type INormalizedPosts = NormalizedSchema<
 export function normalizePost(data: IPost[]): INormalizedPosts {
   return normalize(data, [post])
 }
+
+// export function addPostEntity(normalizedData: INormalizedPosts, newPost: IPost) {
+//   const { id } = newPost
+//   const { entities, result } = normalizedData
+
+//   return {
+//     entities: {
+//       ...entities: {
+//         post
+//       }
+//     }
+//   }
+// }

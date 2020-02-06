@@ -33,6 +33,19 @@ const _ = createSlice({
       state.entities = entities
       state.result = result
     },
+    added(
+      state: IPostState,
+      action: PayloadAction<Omit<IPostEntity, 'comments'>>,
+    ) {
+      const newPost = {
+        ...action.payload, // title, author, body
+        comments: [],
+      }
+      const { id } = newPost
+
+      state.result.push(id)
+      state.entities.posts[id] = newPost
+    },
   },
 })
 
