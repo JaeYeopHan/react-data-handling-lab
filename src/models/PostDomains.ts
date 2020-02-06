@@ -22,3 +22,9 @@ export interface IPostLabel {
   author: string
   countOfComment: number
 }
+
+export const NullComment = {
+  id: -1,
+  author: '',
+  comment: '',
+}

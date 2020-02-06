@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { getPosts, IGetPostsResponse } from '@/api/post'
-import { IPostLabel } from '@/models/PostDomains'
+import { IPostLabel, NullComment } from '@/models/PostDomains'
 import {
   ICommentEntity,
   INormalizedPosts,
@@ -52,13 +52,9 @@ const getPostLabel = (state: IPostState, props: { id: string }): IPostLabel => {
 const getComment = (
   state: IPostState,
   props: { id: string },
-): ICommentEntity | never => {
+): ICommentEntity => {
   if (!state.entities.comments) {
-    return {
-      id: -1,
-      author: '',
-      comment: '',
-    }
+    return NullComment
   }
 
   return state.entities.comments[props.id]
