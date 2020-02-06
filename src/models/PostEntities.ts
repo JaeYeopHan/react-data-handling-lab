@@ -10,7 +10,7 @@ export type ICommentEntity = IEntityTypeOf<IComment>
 
 export type IPostEntity = IEntityTypeOf<IPost>
 
-const user = new schema.Entity<IUser>('users', {}, { idAttribute: 'username' })
+const user = new schema.Entity<IUser>('users', {}, { idAttribute: 'id' })
 
 const comment = new schema.Entity<IComment>('comments', {
   author: user,

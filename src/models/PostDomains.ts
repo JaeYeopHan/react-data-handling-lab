@@ -5,7 +5,7 @@ export interface IComment {
 }
 
 export interface IUser {
-  username: string
+  id: string
   name: string
 }
 
