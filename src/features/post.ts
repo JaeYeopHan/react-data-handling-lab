@@ -1,37 +1,36 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { getPosts, IGetPostsResponse } from '@/api/post'
-import { IPostLabel, NullComment } from '@/models/PostDomains'
-import {
-  ICommentEntity,
-  INormalizedPosts,
-  normalizePost,
-} from '@/models/PostEntities'
+import { getPosts } from '@/api/post'
+import { IPostLabel } from '@/models/PostDomains'
+import { normalizePost } from '@/models/PostEntities'
 
 import { IPostEntity } from '../models/PostEntities'
 import { AppThunk } from '.'
+import { commentActions } from './comment'
 import { ERROR_CODE, errorActions } from './error'
 import { loadingActions } from './loading'
+import { userActions } from './user'
 
-export interface IPostState extends INormalizedPosts {}
+export interface IPostState {
+  posts: { [key: string]: IPostEntity }
+  ids: string[]
+}
 
 const name = 'Post'
 const initialState: IPostState = {
-  entities: {
-    posts: {},
-  },
-  result: [],
+  posts: {},
+  ids: [],
 }
 
 const _ = createSlice({
   name,
   initialState,
   reducers: {
-    success(state: IPostState, action: PayloadAction<IGetPostsResponse>) {
-      const { entities, result } = normalizePost(action.payload)
+    fetched(state: IPostState, action: PayloadAction<IPostState>) {
+      const { posts, ids } = action.payload
 
-      state.entities = entities
-      state.result = result
+      state.posts = posts
+      state.ids = ids
     },
     added(
       state: IPostState,
@@ -43,15 +42,15 @@ const _ = createSlice({
       }
       const { id } = newPost
 
-      state.result.push(id)
-      state.entities.posts[id] = newPost
+      state.ids.push(id)
+      state.posts[id] = newPost
     },
   },
 })
 
-const getPostIds = (state: IPostState) => state.result
+const getPostIds = (state: IPostState) => state.ids
 const getPost = (state: IPostState, props: { id: string }): IPostEntity => {
-  return state.entities.posts[props.id]
+  return state.posts[props.id]
 }
 const getPostLabel = (state: IPostState, props: { id: string }): IPostLabel => {
   const post: IPostEntity = getPost(state, { id: props.id })
@@ -62,24 +61,18 @@ const getPostLabel = (state: IPostState, props: { id: string }): IPostLabel => {
     countOfComment: post.comments.length,
   }
 }
-const getComment = (
-  state: IPostState,
-  props: { id: string },
-): ICommentEntity => {
-  if (!state.entities.comments) {
-    return NullComment
-  }
 
-  return state.entities.comments[props.id]
-}
-
+// TODO ! Check code structure...
 export function fetchPosts(): AppThunk {
   return async function(dispatch) {
     dispatch(loadingActions.start(name))
     try {
       const response = await getPosts()
+      const { entities, result } = normalizePost(response)
 
-      dispatch(postActions.success(response))
+      dispatch(postActions.fetched({ posts: entities.posts, ids: result }))
+      dispatch(commentActions.fetched({ comments: entities.comments }))
+      dispatch(userActions.fetched({ users: entities.users }))
     } catch (e) {
       dispatch(errorActions.trigger(ERROR_CODE.API_ERROR))
     } finally {
@@ -95,8 +88,6 @@ export const postSelector = {
   postIds: getPostIds,
   post: getPost,
   postLabel: getPostLabel,
-
-  comment: getComment,
 }
 export const postThunks = {
   fetchPosts,
