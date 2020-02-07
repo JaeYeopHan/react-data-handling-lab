@@ -6,6 +6,7 @@ import { COMMENT, commentReducer } from './comment'
 import { ERROR, errorReducer } from './error'
 import { LOADING, loadingReducer } from './loading'
 import { POST, postReducer } from './post'
+import { USER, userReducer } from './user'
 
 const rootReducer = combineReducers({
   [LOADING]: loadingReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
 
   [POST]: postReducer,
   [COMMENT]: commentReducer,
+  [USER]: userReducer,
 })
 
 const store = configureStore({ reducer: rootReducer })
