@@ -6,9 +6,12 @@ import { Link } from 'react-router-dom'
 import { IRootState } from '@/features'
 import { IPostLabel } from '@/features/post/PostModel'
 import { POST, postSelector } from '@/features/post/PostSlice'
+import { colors } from '@/styles/colors'
 
-const StyledLi = styled.li`
-  display: flex;
+import { LabelText, StyledLi } from './LabelIndex'
+
+const StyledLabel = styled(LabelText)`
+  background-color: ${colors.white};
 `
 
 interface ILabelProps {
@@ -23,9 +26,15 @@ export const Label = (props: ILabelProps) => {
 
   return (
     <StyledLi>
-      <Link to={`/${id}`}>{label.title}</Link>
-      <Link to={`/user/${label.author}`}>{label.author}</Link>
-      <span>{label.countOfComment}</span>
+      <StyledLabel>
+        <Link to={`/${id}`}>{label.title}</Link>
+      </StyledLabel>
+      <StyledLabel>
+        <Link to={`/user/${label.author}`}>{label.author}</Link>
+      </StyledLabel>
+      <StyledLabel>
+        <span>{label.countOfComment}</span>
+      </StyledLabel>
     </StyledLi>
   )
 }
