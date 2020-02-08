@@ -7,7 +7,7 @@ import { POST, postSelector, postThunks } from '@/features/post/PostSlice'
 
 import { PostLabel } from './PostLabel'
 import { PostWrapper } from './PostWrapper'
-import { Loading } from './shared/common/Loading'
+import { Loading } from './shared/loading/Loading'
 
 export default () => {
   const dispatch = useDispatch()
