@@ -17,12 +17,10 @@ export const PostLabel = (props: IPostLabelProps) => {
   )
 
   return (
-    <Link to={`/${id}`}>
-      <li>
-        <div>{label.title}</div>
-        <div>{label.author}</div>
-        <div>{label.countOfComment}</div>
-      </li>
-    </Link>
+    <li>
+      <Link to={`/${id}`}>{label.title}</Link>
+      <Link to={`/user/${label.author}`}>{label.author}</Link>
+      <span>{label.countOfComment}</span>
+    </li>
   )
 }

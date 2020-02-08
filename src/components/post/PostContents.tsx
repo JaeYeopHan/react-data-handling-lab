@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
 import { IPostEntity } from '@/features/post/PostModel'
@@ -20,7 +21,9 @@ export const PostContents = (props: IPostContentsProps) => {
   return (
     <main>
       <h1>{post.title}</h1>
-      <div className="author">{post.author}</div>
+      <Link to={`/user/${post.author}`} className="author">
+        {post.author}
+      </Link>
       <article>{post.body}</article>
       <section>
         <ul>

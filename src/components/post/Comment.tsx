@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
 import { ICommentEntity } from '@/features/comment/CommentModel'
@@ -18,7 +19,7 @@ export const Comment = (props: ICommentProps) => {
   return (
     <li>
       <div>{comment.comment}</div>
-      <div>{comment.author}</div>
+      <Link to={`/user/${comment.author}`}>{comment.author}</Link>
     </li>
   )
 }
