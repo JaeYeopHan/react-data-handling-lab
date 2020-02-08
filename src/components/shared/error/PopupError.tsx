@@ -1,11 +1,12 @@
 import styled from '@emotion/styled'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { IRootState } from '@/features'
 import {
   ERROR,
   ERROR_CODE,
+  errorActions,
   IErrorState,
 } from '@/features/common/error/ErrorSlice'
 import { colors } from '@/styles/colors'
@@ -36,10 +37,12 @@ const PopupMessage = styled.div`
 `
 
 export const PopupError = () => {
+  const dispatch = useDispatch()
   const { code } = useSelector<IRootState, IErrorState>(state => state[ERROR])
+  const close = useCallback(() => dispatch(errorActions.resolve()), [dispatch])
 
   return (
-    <Dimmed isShow={code === ERROR_CODE.CLEAR}>
+    <Dimmed isShow={code !== ERROR_CODE.CLEAR} onClick={close}>
       <PopupWrapper>
         <PopupTitle>Error!</PopupTitle>
         <PopupMessage>(Code: {code})</PopupMessage>

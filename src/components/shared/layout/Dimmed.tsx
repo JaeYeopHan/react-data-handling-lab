@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react'
 
 interface IDimmedProps {
   isShow: boolean
+  onClick: () => void
   children: ReactNode
 }
 
