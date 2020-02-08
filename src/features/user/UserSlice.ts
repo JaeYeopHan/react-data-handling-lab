@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { IUserEntity } from './UserModel'
+import { IUserEntity, NullUser } from './UserModel'
 
 export interface IUserState {
   users?: { [key: string]: IUserEntity }
@@ -23,6 +23,17 @@ const _ = createSlice({
   },
 })
 
+const getUser = (state: IUserState, props: { id: string }) => {
+  if (!state.users) {
+    return NullUser
+  }
+
+  return state.users[props.id]
+}
+
 export const USER = _.name
 export const userActions = _.actions
 export const userReducer = _.reducer
+export const userSelector = {
+  user: getUser,
+}
