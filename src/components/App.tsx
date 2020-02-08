@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Main from './Main'
+import Main from './main/Main'
 import Post from './post/Post'
 import { User } from './user/User'
 

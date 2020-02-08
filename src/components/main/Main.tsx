@@ -5,10 +5,10 @@ import { IRootState } from '@/features'
 import { ILoadingState, LOADING } from '@/features/common/loading/LoadingSlice'
 import { POST, postSelector, postThunks } from '@/features/post/PostSlice'
 
+import { ListWrapper } from '../shared/layout/ListWrapper'
+import { MainContainer } from '../shared/layout/MainContainer'
+import { Loading } from '../shared/loading/Loading'
 import { Label } from './Label'
-import { ListWrapper } from './shared/layout/ListWrapper'
-import { MainContainer } from './shared/layout/MainContainer'
-import { Loading } from './shared/loading/Loading'
 
 export default () => {
   const dispatch = useDispatch()
