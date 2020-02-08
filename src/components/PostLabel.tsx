@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
-import { POST, postSelector } from '@/features/post'
-import { IPostLabel } from '@/models/PostDomains'
+import { IPostLabel } from '@/features/post/PostModel'
+import { POST, postSelector } from '@/features/post/PostSlice'
 
 interface IPostLabelProps {
   id: string

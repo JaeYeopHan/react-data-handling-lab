@@ -1,4 +1,4 @@
-import { IPostState, postActions, postReducer } from '@/features/post'
+import { IPostState, postActions, postReducer } from '@/features/post/PostSlice'
 
 test('add new post', () => {
   // Given

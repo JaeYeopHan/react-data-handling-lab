@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { IRootState } from '@/features'
-import { POST, postSelector } from '@/features/post'
-import { IPostEntity } from '@/models/PostEntities'
+import { IPostEntity } from '@/features/post/PostModel'
+import { POST, postSelector } from '@/features/post/PostSlice'
 
 import { Comment } from './Comment'
 
@@ -21,9 +21,7 @@ export const PostContents = (props: IPostContentsProps) => {
     <main>
       <h1>{post.title}</h1>
       <div className="author">{post.author}</div>
-      <article>
-        {post.body}
-      </article>
+      <article>{post.body}</article>
       <section>
         <ul>
           {post.comments.map(commentId => (

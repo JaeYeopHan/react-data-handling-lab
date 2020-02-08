@@ -1,4 +1,4 @@
-import { normalizePost } from '@/models/PostEntities'
+import { normalizePost } from '@/features/post/PostModel'
 
 test('should return normalized post data', () => {
   // Given

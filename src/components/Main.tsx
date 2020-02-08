@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { IRootState } from '@/features'
-import { ILoadingState, LOADING } from '@/features/loading'
-import { POST, postSelector, postThunks } from '@/features/post'
+import { ILoadingState, LOADING } from '@/features/common/loading/LoadingSlice'
+import { POST, postSelector, postThunks } from '@/features/post/PostSlice'
 
 import { PostLabel } from './PostLabel'
 import { PostWrapper } from './PostWrapper'
@@ -11,8 +11,12 @@ import { Loading } from './shared/common/Loading'
 
 export default () => {
   const dispatch = useDispatch()
-  const loading = useSelector<IRootState, ILoadingState>(state => state[LOADING])
-  const postIds = useSelector<IRootState, string[]>(state => postSelector.postIds(state[POST]))
+  const loading = useSelector<IRootState, ILoadingState>(
+    state => state[LOADING],
+  )
+  const postIds = useSelector<IRootState, string[]>(state =>
+    postSelector.postIds(state[POST]),
+  )
 
   useEffect(() => {
     dispatch(postThunks.fetchPosts())
@@ -26,7 +30,9 @@ export default () => {
     <main>
       <h1>Normalize Example</h1>
       <PostWrapper>
-        {postIds.map(id => <PostLabel key={id} id={id} />)}
+        {postIds.map(id => (
+          <PostLabel key={id} id={id} />
+        ))}
       </PostWrapper>
     </main>
   )

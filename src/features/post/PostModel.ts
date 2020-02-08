@@ -2,21 +2,20 @@ import { normalize, NormalizedSchema, schema } from 'normalizr'
 
 import { IEntityTypeOf, IndexSignatureStringType } from '@/typings'
 
-import { IComment, IPost, IUser } from './PostDomains'
+import { comment, IComment, ICommentEntity } from '../comment/CommentModel'
+import { IUser, IUserEntity, user } from '../user/UserModel'
 
-export type IUserEntity = IEntityTypeOf<IUser>
-
-export type ICommentEntity = IEntityTypeOf<IComment>
+export interface IPost {
+  id: string
+  title: string
+  author: IUser
+  body: string
+  comments: IComment[]
+}
 
 export type IPostEntity = IEntityTypeOf<IPost>
 
-const user = new schema.Entity<IUser>('users', {}, { idAttribute: 'id' })
-
-const comment = new schema.Entity<IComment>('comments', {
-  author: user,
-})
-
-const post = new schema.Entity<IPost>('posts', {
+export const post = new schema.Entity<IPost>('posts', {
   author: user,
   comments: [comment],
 })
@@ -46,3 +45,9 @@ export function normalizePost(data: IPost[]): INormalizedPosts {
 //     }
 //   }
 // }
+
+export interface IPostLabel {
+  title: string
+  author: string
+  countOfComment: number
+}

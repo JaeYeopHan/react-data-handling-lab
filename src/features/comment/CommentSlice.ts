@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { NullComment } from '@/models/PostDomains'
-import { ICommentEntity } from '@/models/PostEntities'
+import { ICommentEntity, NullComment } from './CommentModel'
 
 export interface ICommentState {
   comments?: { [key: string]: ICommentEntity }

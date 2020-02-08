@@ -2,11 +2,11 @@ import { Action, combineReducers } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
 
-import { COMMENT, commentReducer } from './comment'
-import { ERROR, errorReducer } from './error'
-import { LOADING, loadingReducer } from './loading'
-import { POST, postReducer } from './post'
-import { USER, userReducer } from './user'
+import { COMMENT, commentReducer } from './comment/CommentSlice'
+import { ERROR, errorReducer } from './common/error/ErrorSlice'
+import { LOADING, loadingReducer } from './common/loading/LoadingSlice'
+import { POST, postReducer } from './post/PostSlice'
+import { USER, userReducer } from './user/UserSlice'
 
 const rootReducer = combineReducers({
   [LOADING]: loadingReducer,

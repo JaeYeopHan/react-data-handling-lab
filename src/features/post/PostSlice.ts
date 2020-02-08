@@ -1,15 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { batch } from 'react-redux'
 
 import { getPosts } from '@/api/post'
-import { IPostLabel } from '@/models/PostDomains'
-import { normalizePost } from '@/models/PostEntities'
+import {
+  IPostEntity,
+  IPostLabel,
+  normalizePost,
+} from '@/features/post/PostModel'
 
-import { IPostEntity } from '../models/PostEntities'
-import { AppThunk } from '.'
-import { commentActions } from './comment'
-import { ERROR_CODE, errorActions } from './error'
-import { loadingActions } from './loading'
-import { userActions } from './user'
+import { AppThunk } from '..'
+import { commentActions } from '../comment/CommentSlice'
+import { ERROR_CODE, errorActions } from '../common/error/ErrorSlice'
+import { loadingActions } from '../common/loading/LoadingSlice'
+import { userActions } from '../user/UserSlice'
 
 export interface IPostState {
   posts: { [key: string]: IPostEntity }
@@ -62,7 +65,6 @@ const getPostLabel = (state: IPostState, props: { id: string }): IPostLabel => {
   }
 }
 
-// TODO ! Check code structure...
 export function fetchPosts(): AppThunk {
   return async function(dispatch) {
     dispatch(loadingActions.start(name))
@@ -70,9 +72,11 @@ export function fetchPosts(): AppThunk {
       const response = await getPosts()
       const { entities, result } = normalizePost(response)
 
-      dispatch(postActions.fetched({ posts: entities.posts, ids: result }))
-      dispatch(commentActions.fetched({ comments: entities.comments }))
-      dispatch(userActions.fetched({ users: entities.users }))
+      batch(() => [
+        dispatch(postActions.fetched({ posts: entities.posts, ids: result })),
+        dispatch(commentActions.fetched({ comments: entities.comments })),
+        dispatch(userActions.fetched({ users: entities.users })),
+      ])
     } catch (e) {
       dispatch(errorActions.trigger(ERROR_CODE.API_ERROR))
     } finally {

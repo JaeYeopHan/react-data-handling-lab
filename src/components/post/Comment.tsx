@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { IRootState } from '@/features'
-import { COMMENT, commentSelector } from '@/features/comment'
-import { ICommentEntity } from '@/models/PostEntities'
+import { ICommentEntity } from '@/features/comment/CommentModel'
+import { COMMENT, commentSelector } from '@/features/comment/CommentSlice'
 
 interface ICommentProps {
   id: string

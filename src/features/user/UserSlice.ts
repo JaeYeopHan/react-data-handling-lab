@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { IUserEntity } from './../models/PostEntities'
+import { IUserEntity } from './UserModel'
 
 export interface IUserState {
   users?: { [key: string]: IUserEntity }

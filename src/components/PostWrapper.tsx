@@ -5,7 +5,5 @@ interface IPostWrapperProps {
 }
 
 export const PostWrapper = (props: IPostWrapperProps) => {
-  return (
-    <ul>{props.children}</ul>
-  )
+  return <ul>{props.children}</ul>
 }
