@@ -6,22 +6,22 @@ export enum ERROR_CODE {
   UNKNOWN_ERROR = 'UNKNOWN_ERROR',
 }
 
-export interface ErrorState {
+export interface IErrorState {
   code: ERROR_CODE
 }
 
 const name = 'Error'
-const initialState: ErrorState = {
+const initialState: IErrorState = {
   code: ERROR_CODE.CLEAR,
 }
 const _ = createSlice({
   name,
   initialState,
   reducers: {
-    trigger(state: ErrorState, action: PayloadAction<ERROR_CODE>) {
+    trigger(state: IErrorState, action: PayloadAction<ERROR_CODE>) {
       state.code = action.payload
     },
-    resolve(state: ErrorState) {
+    resolve(state: IErrorState) {
       state.code = ERROR_CODE.CLEAR
     },
   },
