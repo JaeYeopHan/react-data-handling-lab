@@ -6,6 +6,8 @@ import { IRootState } from '@/features'
 import { IPostEntity } from '@/features/post/PostModel'
 import { POST, postSelector } from '@/features/post/PostSlice'
 
+import { ListWrapper } from '../shared/layout/ListWrapper'
+import { MainContainer } from '../shared/layout/MainContainer'
 import { Comment } from './Comment'
 
 interface IPostContentsProps {
@@ -19,19 +21,19 @@ export const PostContents = (props: IPostContentsProps) => {
   )
 
   return (
-    <main>
+    <MainContainer>
       <h1>{post.title}</h1>
       <Link to={`/user/${post.author}`} className="author">
         {post.author}
       </Link>
       <article>{post.body}</article>
       <section>
-        <ul>
+        <ListWrapper>
           {post.comments.map(commentId => (
             <Comment key={`comment-${commentId}`} id={commentId} />
           ))}
-        </ul>
+        </ListWrapper>
       </section>
-    </main>
+    </MainContainer>
   )
 }

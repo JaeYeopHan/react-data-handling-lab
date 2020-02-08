@@ -5,6 +5,8 @@ import { IRootState } from '@/features'
 import { IUserEntity } from '@/features/user/UserModel'
 import { USER, userSelector } from '@/features/user/UserSlice'
 
+import { MainContainer } from '../shared/layout/MainContainer'
+
 interface IUserProfileProps {
   id: string
 }
@@ -16,10 +18,10 @@ export const UserProfile = (props: IUserProfileProps) => {
   )
 
   return (
-    <main>
+    <MainContainer>
       <h2>User Profile</h2>
       <div>{userInfo.id}</div>
       <div>{userInfo.name}</div>
-    </main>
+    </MainContainer>
   )
 }

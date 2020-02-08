@@ -5,8 +5,9 @@ import { IRootState } from '@/features'
 import { ILoadingState, LOADING } from '@/features/common/loading/LoadingSlice'
 import { POST, postSelector, postThunks } from '@/features/post/PostSlice'
 
-import { PostLabel } from './PostLabel'
-import { PostWrapper } from './PostWrapper'
+import { Label } from './Label'
+import { ListWrapper } from './shared/layout/ListWrapper'
+import { MainContainer } from './shared/layout/MainContainer'
 import { Loading } from './shared/loading/Loading'
 
 export default () => {
@@ -27,13 +28,13 @@ export default () => {
   }
 
   return (
-    <main>
+    <MainContainer>
       <h1>Normalize Example</h1>
-      <PostWrapper>
+      <ListWrapper>
         {postIds.map(id => (
-          <PostLabel key={id} id={id} />
+          <Label key={id} id={id} />
         ))}
-      </PostWrapper>
-    </main>
+      </ListWrapper>
+    </MainContainer>
   )
 }
