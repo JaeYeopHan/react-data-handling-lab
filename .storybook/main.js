@@ -1,7 +1,4 @@
 const customWebpackConfig = require('../craco.config.js')
-const { addDecorator } = require('@storybook/react')
-
-addDecorator()
 
 module.exports = {
   stories: ['../src/**/*.stories.tsx'],
