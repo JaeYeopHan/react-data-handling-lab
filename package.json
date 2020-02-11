@@ -58,6 +58,8 @@
     "@storybook/addon-viewport": "^5.3.12",
     "@storybook/addons": "^5.3.12",
     "@storybook/preset-create-react-app": "^1.5.2",
-    "@storybook/react": "^5.3.12"
+    "@storybook/react": "^5.3.12",
+    "@types/storybook-react-router": "^1.0.1",
+    "storybook-react-router": "^1.0.8"
   }
 }
