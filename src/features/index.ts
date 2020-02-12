@@ -8,7 +8,7 @@ import { LOADING, loadingReducer } from './common/loading/LoadingSlice'
 import { POST, postReducer } from './post/PostSlice'
 import { USER, userReducer } from './user/UserSlice'
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   [LOADING]: loadingReducer,
   [ERROR]: errorReducer,
 
