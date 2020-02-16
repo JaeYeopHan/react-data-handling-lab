@@ -33,7 +33,9 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,5 +51,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.12",
+    "@storybook/addon-console": "^1.2.1",
+    "@storybook/addon-links": "^5.3.12",
+    "@storybook/addon-viewport": "^5.3.12",
+    "@storybook/addons": "^5.3.12",
+    "@storybook/preset-create-react-app": "^1.5.2",
+    "@storybook/react": "^5.3.12",
+    "@types/storybook-react-router": "^1.0.1",
+    "storybook-react-router": "^1.0.8"
   }
 }
