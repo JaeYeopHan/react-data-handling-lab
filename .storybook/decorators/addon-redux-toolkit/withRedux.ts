@@ -1,6 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-
-import { rootReducer } from '@/features'
+import { configureStore, getDefaultMiddleware, Reducer } from '@reduxjs/toolkit'
 
 import { withProvider } from './withProvider'
 import {
@@ -13,7 +11,7 @@ const defaultWithReduxOption: ActionsPreventMiddlewareOptionType = {
   debug: false,
 }
 
-export const withRedux = (
+export const withRedux = <R extends Reducer>(rootReducer: R) => (
   mockState: any,
   customOption: ActionsPreventMiddlewareOptionType = defaultWithReduxOption,
 ) => {
