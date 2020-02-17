@@ -6,19 +6,21 @@ export type ActionsPreventMiddlewareOptionType = {
 }
 
 const defaultOption: ActionsPreventMiddlewareOptionType = {
-  debug: true,
   prevents: true,
+  debug: true,
 }
 
 export const preventActions = (
   customOption?: ActionsPreventMiddlewareOptionType,
 ) => {
-  const option = { ...defaultOption, ...customOption }
+  const option: ActionsPreventMiddlewareOptionType = {
+    ...defaultOption,
+    ...customOption,
+  }
   const actionPreventMiddleware: Middleware = (store: MiddlewareAPI) => {
     option.debug && console.log(`[ACTION_PREVENT] Applied!`)
 
     return next => <A extends Action>(action: A) => {
-      const triggerAction = () => next(action)
       const preventAction = () => {
         option.debug && console.log(`[ACTION_PREVENT] Prevent ${action.type}!`)
 
@@ -26,7 +28,7 @@ export const preventActions = (
       }
 
       if (!option.prevents) {
-        return triggerAction()
+        return next(action)
       }
 
       if (typeof option.prevents === 'boolean') {
@@ -37,7 +39,7 @@ export const preventActions = (
         return preventAction()
       }
 
-      return triggerAction()
+      return next(action)
     }
   }
 
