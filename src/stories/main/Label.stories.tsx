@@ -3,8 +3,7 @@ import React from 'react'
 import { Label } from '@/components/main/Label'
 import { LabelIndex } from '@/components/main/LabelIndex'
 import { POST } from '@/features/post/PostSlice'
-
-import { withRedux } from '../../../.storybook/decorators/addon-redux-toolkit'
+import { withState } from '@/stories/addons'
 
 export default {
   title: 'Main Page/Label',
@@ -14,7 +13,7 @@ export const Index = () => <LabelIndex />
 export const Item = () => <Label id={'post2'} />
 
 Item.story = {
-  decorators: [withRedux({
+  decorators: [withState({
     [POST]: {
       posts: {
         'post2': {

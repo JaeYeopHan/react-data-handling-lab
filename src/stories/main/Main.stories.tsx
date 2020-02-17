@@ -2,8 +2,8 @@ import React from 'react'
 
 import Main from '@/components/main/Main'
 import { POST } from '@/features/post/PostSlice'
+import { withState } from '@/stories/addons'
 
-import { withRedux } from '../../../.storybook/decorators/addon-redux-toolkit'
 
 export default {
   title: 'Main Page',
@@ -13,7 +13,7 @@ export default {
 export const Index = () => <Main />
 
 Index.story = {
-  decorators: [withRedux({
+  decorators: [withState({
     [POST]: {
       posts: {
         'post1': {
