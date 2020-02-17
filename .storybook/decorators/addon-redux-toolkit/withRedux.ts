@@ -1,25 +1,30 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
 import { rootReducer } from '@/features'
 
 import { withProvider } from './withProvider'
+import {
+  preventActions,
+  ActionsPreventMiddlewareOptionType,
+} from './redux-action-prevent'
 
-type WithReduxOptionType = {
-  preventAction: boolean
-  debug: boolean
-}
-const defaultWithReduxOption: WithReduxOptionType = {
-  preventAction: true,
+const defaultWithReduxOption: ActionsPreventMiddlewareOptionType = {
+  prevents: true,
   debug: false,
 }
+
 export const withRedux = (
   mockState: any,
-  customOption: WithReduxOptionType = defaultWithReduxOption,
+  customOption: ActionsPreventMiddlewareOptionType = defaultWithReduxOption,
 ) => {
   const option = { ...defaultWithReduxOption, ...customOption }
+  const preventActionsMiddleware = preventActions(option)
+
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: mockState,
+    devTools: true,
+    middleware: [...getDefaultMiddleware(), preventActionsMiddleware],
   })
 
   option.debug && console.log('[STORE] -> ', store.getState())
