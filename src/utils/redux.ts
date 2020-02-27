@@ -1,20 +1,26 @@
 import { IRootState } from '@/features'
 
-type IndexSignatureWith<T> = { [key: string]: T }
-type SliceSelectorType = IndexSignatureWith<(state: any, ...args: any) => any>
-type RootSelectorType = IndexSignatureWith<
-  (state: IRootState, ...args: any) => any
->
+type ExtractedPropsType<T> = T extends (state: any, args: infer T) => unknown
+  ? T
+  : never
+type ReturnType<T> = T extends (...args: any[]) => infer T ? T : never
 
-export function connectToRoot(
+type ConnectedSelectorType<M> = {
+  [key in keyof M]: (
+    state: IRootState,
+    props?: ExtractedPropsType<M[key]>,
+  ) => ReturnType<M[key]>
+}
+
+export function connectToRoot<T>(
   name: keyof IRootState,
-  selectorMap: SliceSelectorType,
-): RootSelectorType {
+  selectorMap: T,
+): ConnectedSelectorType<T> {
   return Object.entries(selectorMap).reduce((prev, [key, selectorFunction]) => {
     return {
       ...prev,
-      [key]: (state: IRootState, ...args: any) =>
-        selectorFunction(state[name], ...args),
+      [key]: (state: IRootState, props: unknown) =>
+        selectorFunction(state[name], props),
     }
-  }, {})
+  }, {} as any)
 }
