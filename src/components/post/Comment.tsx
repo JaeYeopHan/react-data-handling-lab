@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
 import { ICommentEntity } from '@/features/comment/CommentModel'
-import { COMMENT, commentSelector } from '@/features/comment/CommentSlice'
+import { commentSelector } from '@/features/comment/CommentSlice'
 
 interface ICommentProps {
   id: string
@@ -13,7 +13,7 @@ interface ICommentProps {
 export const Comment = (props: ICommentProps) => {
   const { id } = props
   const comment = useSelector<IRootState, ICommentEntity>(state =>
-    commentSelector.comment(state[COMMENT], { id }),
+    commentSelector.comment(state, { id }),
   )
 
   return (

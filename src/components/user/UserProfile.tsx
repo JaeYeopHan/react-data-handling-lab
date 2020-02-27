@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { IRootState } from '@/features'
 import { IUserEntity } from '@/features/user/UserModel'
-import { USER, userSelector } from '@/features/user/UserSlice'
+import { userSelector } from '@/features/user/UserSlice'
 
 import { MainContainer } from '../shared/layout/MainContainer'
 
@@ -14,7 +14,7 @@ interface IUserProfileProps {
 export const UserProfile = (props: IUserProfileProps) => {
   const { id } = props
   const userInfo = useSelector<IRootState, IUserEntity>(state =>
-    userSelector.user(state[USER], { id }),
+    userSelector.user(state, { id }),
   )
 
   return (

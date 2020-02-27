@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
 import { IPostEntity } from '@/features/post/PostModel'
-import { POST, postSelector } from '@/features/post/PostSlice'
+import { postSelector } from '@/features/post/PostSlice'
 
 import { ListWrapper } from '../shared/layout/ListWrapper'
 import { MainContainer } from '../shared/layout/MainContainer'
@@ -17,7 +17,7 @@ interface IPostContentsProps {
 export const PostContents = (props: IPostContentsProps) => {
   const { id } = props
   const post = useSelector<IRootState, IPostEntity>(state =>
-    postSelector.post(state[POST], { id }),
+    postSelector.post(state, { id }),
   )
 
   return (

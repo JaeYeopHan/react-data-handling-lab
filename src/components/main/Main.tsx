@@ -23,9 +23,7 @@ export default () => {
   const loading = useSelector<IRootState, ILoadingState>(
     state => state[LOADING],
   )
-  const postIds = useSelector<IRootState, string[]>(state =>
-    postSelector.postIds(state[POST]),
-  )
+  const postIds = useSelector<IRootState, string[]>(postSelector.postIds)
 
   useEffect(() => {
     dispatch(postThunks.fetchPosts())

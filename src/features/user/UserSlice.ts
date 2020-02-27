@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { connectToRoot } from '@/utils/redux'
+
 import { IUserEntity, NullUser } from './UserModel'
 
 export interface IUserState {
@@ -23,7 +25,7 @@ const _ = createSlice({
   },
 })
 
-const getUser = (state: IUserState, props: { id: string }) => {
+const getUser = (state: IUserState, props: { id: string }): IUserEntity => {
   if (!state.users) {
     return NullUser
   }
@@ -34,6 +36,6 @@ const getUser = (state: IUserState, props: { id: string }) => {
 export const USER = _.name
 export const userActions = _.actions
 export const userReducer = _.reducer
-export const userSelector = {
+export const userSelector = connectToRoot(name, {
   user: getUser,
-}
+})

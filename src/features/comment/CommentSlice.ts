@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { connectToRoot } from '@/utils/redux'
+
 import { ICommentEntity, NullComment } from './CommentModel'
 
 export interface ICommentState {
@@ -37,6 +39,6 @@ const getComment = (
 export const COMMENT = _.name
 export const commentActions = _.actions
 export const commentReducer = _.reducer
-export const commentSelector = {
+export const commentSelector = connectToRoot(name, {
   comment: getComment,
-}
+})

@@ -7,6 +7,7 @@ import {
   IPostLabel,
   normalizePost,
 } from '@/features/post/PostModel'
+import { connectToRoot } from '@/utils/redux'
 
 import { AppThunk } from '..'
 import { commentActions } from '../comment/CommentSlice'
@@ -88,11 +89,11 @@ export function fetchPosts(): AppThunk {
 export const POST = _.name
 export const postReducer = _.reducer
 export const postActions = _.actions
-export const postSelector = {
+export const postSelector = connectToRoot(name, {
   postIds: getPostIds,
   post: getPost,
   postLabel: getPostLabel,
-}
+})
 export const postThunks = {
   fetchPosts,
 }

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
 import { IPostLabel } from '@/features/post/PostModel'
-import { POST, postSelector } from '@/features/post/PostSlice'
+import { postSelector } from '@/features/post/PostSlice'
 import { colors } from '@/styles/colors'
 
 import { LabelText, StyledLi } from './LabelIndex'
@@ -21,7 +21,7 @@ interface ILabelProps {
 export const Label = (props: ILabelProps) => {
   const { id } = props
   const label = useSelector<IRootState, IPostLabel>(state =>
-    postSelector.postLabel(state[POST], { id }),
+    postSelector.postLabel(state, { id }),
   )
 
   return (
