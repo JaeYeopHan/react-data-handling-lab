@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { IRootState } from '@/features'
-import { ILoadingState, LOADING } from '@/features/common/loading/LoadingSlice'
+import { LOADING } from '@/features/common/loading/LoadingSlice'
 import { POST, postSelector, postThunks } from '@/features/post/PostSlice'
 
 import { ListWrapper } from '../shared/layout/ListWrapper'
@@ -20,10 +20,8 @@ const StyledH1 = styled.h1`
 
 export default () => {
   const dispatch = useDispatch()
-  const loading = useSelector<IRootState, ILoadingState>(
-    state => state[LOADING],
-  )
-  const postIds = useSelector<IRootState, string[]>(postSelector.postIds)
+  const loading = useSelector((state: IRootState) => state[LOADING])
+  const postIds = useSelector(postSelector.postIds)
 
   useEffect(() => {
     dispatch(postThunks.fetchPosts())

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
-import { ICommentEntity } from '@/features/comment/CommentModel'
 import { commentSelector } from '@/features/comment/CommentSlice'
 
 interface ICommentProps {
@@ -12,7 +11,7 @@ interface ICommentProps {
 
 export const Comment = (props: ICommentProps) => {
   const { id } = props
-  const comment = useSelector<IRootState, ICommentEntity>(state =>
+  const comment = useSelector((state: IRootState) =>
     commentSelector.comment(state, { id }),
   )
 

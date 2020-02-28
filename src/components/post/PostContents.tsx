@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
-import { IPostEntity } from '@/features/post/PostModel'
 import { postSelector } from '@/features/post/PostSlice'
 
 import { ListWrapper } from '../shared/layout/ListWrapper'
@@ -16,7 +15,7 @@ interface IPostContentsProps {
 
 export const PostContents = (props: IPostContentsProps) => {
   const { id } = props
-  const post = useSelector<IRootState, IPostEntity>(state =>
+  const post = useSelector((state: IRootState) =>
     postSelector.post(state, { id }),
   )
 

@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { IRootState } from '@/features'
-import { IPostLabel } from '@/features/post/PostModel'
 import { postSelector } from '@/features/post/PostSlice'
 import { colors } from '@/styles/colors'
 
@@ -20,7 +19,7 @@ interface ILabelProps {
 
 export const Label = (props: ILabelProps) => {
   const { id } = props
-  const label = useSelector<IRootState, IPostLabel>(state =>
+  const label = useSelector((state: IRootState) =>
     postSelector.postLabel(state, { id }),
   )
 

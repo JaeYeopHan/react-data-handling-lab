@@ -7,7 +7,6 @@ import {
   ERROR,
   ERROR_CODE,
   errorActions,
-  IErrorState,
 } from '@/features/common/error/ErrorSlice'
 import { colors } from '@/styles/colors'
 
@@ -38,7 +37,7 @@ const PopupMessage = styled.div`
 
 export const PopupError = () => {
   const dispatch = useDispatch()
-  const { code } = useSelector<IRootState, IErrorState>(state => state[ERROR])
+  const { code } = useSelector((state: IRootState) => state[ERROR])
   const close = useCallback(() => dispatch(errorActions.resolve()), [dispatch])
 
   return (
