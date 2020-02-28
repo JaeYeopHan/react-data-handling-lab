@@ -1,3 +1,4 @@
+const path = require('path')
 const customWebpackConfig = require('../craco.config.js')
 
 module.exports = {
@@ -18,6 +19,7 @@ module.exports = {
         alias: {
           ...config.resolve.alias,
           ...webpack.alias,
+          '.storybook': path.join(__dirname, '.'),
         },
       },
     }
