@@ -7,7 +7,7 @@ import {
 } from './redux-action-prevent'
 
 const defaultWithReduxOption: ActionsPreventMiddlewareOptionType = {
-  prevents: true,
+  allowedActions: [],
   debug: false,
 }
 
