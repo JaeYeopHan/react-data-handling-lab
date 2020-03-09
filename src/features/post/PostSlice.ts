@@ -1,12 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { batch } from 'react-redux'
 
 import { getPosts } from '@/api/post'
-import {
-  IPostEntity,
-  IPostLabel,
-  normalizePost,
-} from '@/features/post/PostModel'
+import { IPostEntity, normalizePost } from '@/features/post/PostModel'
 import { connectToRoot } from '@/utils/redux'
 
 import { AppThunk } from '..'
@@ -56,15 +52,11 @@ const getPostIds = (state: IPostState) => state.ids
 const getPost = (state: IPostState, props: { id: string }): IPostEntity => {
   return state.posts[props.id]
 }
-const getPostLabel = (state: IPostState, props: { id: string }): IPostLabel => {
-  const post: IPostEntity = getPost(state, { id: props.id })
-
-  return {
-    title: post.title,
-    author: post.author,
-    countOfComment: post.comments.length,
-  }
-}
+const getPostLabel = createSelector(getPost, post => ({
+  title: post.title,
+  author: post.author,
+  countOfComment: post.comments.length,
+}))
 
 export function fetchPosts(): AppThunk {
   return async function(dispatch) {
