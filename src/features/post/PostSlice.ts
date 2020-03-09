@@ -89,3 +89,10 @@ export const postSelector = connectToRoot(name, {
 export const postThunks = {
   fetchPosts,
 }
+// export const usePost = () => {
+//   return {
+//     state: {
+//       useSelector(),
+//     },
+//   }
+// }
