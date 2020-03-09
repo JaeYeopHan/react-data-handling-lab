@@ -33,5 +33,5 @@ Index.story = {
       },
       ids: ['post1', 'post2'],
     },
-  }, { prevents: [POST], debug: true })],
+  })],
 }
